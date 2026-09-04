@@ -9,7 +9,10 @@ let counter = document.querySelector(".counter");
 
 // Welcome button
 welcomeBtn.onclick = function () {
-    message.innerHTML = "Welcome, " + nameInput.value;
+
+    message.textContent = "Welcome, " + nameInput.value;
+
+    counter.textContent = Number(counter.textContent) + 1;
 };
 
 
@@ -18,6 +21,11 @@ checkBtn.onclick = function () {
 
     let age = Number(prompt("Please enter your age"));
 
+    if (isNaN(age)) {
+        result.textContent = "Please enter a valid age.";
+        return;
+    }
+
     let sure = confirm("Are you sure you want to continue?");
 
     if (sure) {
@@ -25,25 +33,24 @@ checkBtn.onclick = function () {
         switch (true) {
 
             case age >= 18:
-                result.innerHTML = "You are allowed";
+                result.textContent = "You are allowed";
                 break;
 
-            case age >= 13 && age <= 17:
-                result.innerHTML = "You need permission";
+            case age >= 13:
+                result.textContent = "You need permission";
                 break;
 
-            case age < 13:
-                result.innerHTML = "You are too young";
+            case age >= 0:
+                result.textContent = "You are too young";
                 break;
+
+            default:
+                result.textContent = "Please enter a valid age.";
         }
 
     } else {
-        result.innerHTML = "You cancelled";
+
+        result.textContent = "You cancelled";
+
     }
-};
-
-
-// Counter
-welcomeBtn.onmousemove = function () {
-    counter.innerHTML = Number(counter.innerHTML) + 1;
 };
